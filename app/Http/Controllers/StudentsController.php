@@ -34,11 +34,17 @@ return view ('Students.create');
         $Students ->class = $request->class;
       //  $Students->gender= $gender;
         $Students->dob = $request->dob;
-        $Students->photo = "ddfdff";
-            // $Students->photo = $request()->file('photo')->store('public/images');
-       // $Product->created_at=date('Y-m-d H:i:s');
 
-       // $Product->updated_at= date('Y-m-d H:i:s');
+        $photo = $request->file('photo')->getClientOriginalName();
+
+        $filename = time().$photo;
+        if($request->hasFile('photo')){
+
+            $file = $request->file('photo');
+           $file->move('upload', $filename);
+
+    }
+        $Students->photo = $filename;
         $Students->save();
         return redirect()->route('index');
 
@@ -46,7 +52,7 @@ return view ('Students.create');
     public function delete($id){
         $listStudents = Students::find($id);
         $listStudents->delete();
-        return redirect()->route('index');
+        return redirect()->route('index')->with('alert-danger', 'successfully deleted.');
     }
 
 
@@ -62,9 +68,19 @@ return view ('Students.create');
         $listStudents->masv= $request->masv;
         $listStudents->name= $request->name;
         $listStudents ->class = $request->class;
-        //  $Students->gender= $gender;
         $listStudents->dob = $request->dob;
-        $listStudents->photo = "ddfdff";
+
+
+        $photo = $request->file('photo')->getClientOriginalName();
+
+        $filename = time().$photo;
+        if($request->hasFile('photo')){
+
+            $file = $request->file('photo');
+            $file->move('upload', $filename);
+
+        }
+        $listStudents->photo = $filename;
         $listStudents->save();
         return redirect()->route('index');
     }

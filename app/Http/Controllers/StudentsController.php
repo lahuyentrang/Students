@@ -85,4 +85,10 @@ return view ('Students.create');
         return redirect()->route('index');
     }
 
+
+    public function details($id){
+        $Students = Students::find($id);
+        return view('Students.details', array('model'=>$Students));
+    }
+
 } 

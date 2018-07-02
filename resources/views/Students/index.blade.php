@@ -1,3 +1,4 @@
+{{--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +14,9 @@
   <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+--}}
+@extends('Layouts.layouts')
+@section('content')
   <script>
   $(document).ready(function(){
 
@@ -34,19 +38,11 @@
 
   </script>
 
-</head>
-<body>
+{{--</head>
+<body>--}}
 
 
  <table class="table table-hover" id="sample-table-1">
-        						<!-- start: BASIC TABLE PANEL -->
-
-
-           										<h4 >Students management</h4>
-           										<br>
-           										{{--<div id="div1">
-                                                </div>
---}}
 
            										<div id="div1" ><button id="div3" color="white">Create a new student</button></div>
 
@@ -54,7 +50,7 @@
            									<div >
 
            										<table class="table table-hover" id="sample-table-1">
-           											<thead>
+           											<thead class ="thead-dark">
            												<tr>
            												    <th>STT</th>
 
@@ -64,6 +60,8 @@
            													<th>Ngày Sinh</th>
            													<th>Ảnh</th>
 
+           													<th></th>
+           													<th></th>
            													<th></th>
            												</tr>
            											</thead>
@@ -86,11 +84,14 @@
            													{{--</div>--}}
 
 
-
+                                                            <td>
            														<a href="{{url('/delete',['id'=>$item->id])}}"><button  color="white">Delete</button></a>
+                                                            </td>
+                                                            <td>
+                                                            <button color = "white" ><a href="{{url('/details',['id'=>$item->id])}}">Details</a></button>
+                                                            </td>
 
 
-                                                                <td>
            												</tr>
                                                     @endforeach
            											</tbody>
@@ -102,6 +103,9 @@
 
 </table>
 
+@endsection
 
+
+{{--
 </body>
-</html>
+</html>--}}

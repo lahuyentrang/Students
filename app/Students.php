@@ -9,10 +9,14 @@
 namespace App;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+
 class students extends Model {
+
+   use SoftDeletes;
    // protected $primaryKey ='id';
     protected $table='students';
     protected $fillable= ['id','masv','name','class','dob','photo'];
-
-
+   protected $dates = ['deleted_at'];
 } 

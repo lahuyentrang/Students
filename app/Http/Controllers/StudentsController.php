@@ -10,31 +10,28 @@ namespace App\Http\Controllers;
 use App\Students;
 use Illuminate\Http\request;
 use App\Http\Controllers\Controller;
-class StudentsController  extends Controller{
+use Illuminate\Database\Eloquent\Relations;
+class StudentsController extends Controller{
+
+
     public function index(){
         $listStudent = Students::all();
         return view ('Students.index', array('model' =>$listStudent));
     }
     public function create(){
-return view ('Students.create');
-}
+        return view ('Students.create');
+    }
     public function store(Request $request){
-        //$masv = $request ->get('masv');
-       // $name=$request->get('name');
-        //$class =$request->get('class');
-        // $gender = $request->get('gender');
-       // $dob = $request->get('dob');
 
 
-        //new object
-        $Students = new Students();
-       // $game->title = request('title');
-        $Students->masv= $request->masv;
-        $Students->name= $request->name;
+
+            //new object
+       $Students = new Students();
+       $Students->masv= $request->masv;
+       $Students->name= $request->name;
         $Students ->class = $request->class;
-      //  $Students->gender= $gender;
-        $Students->dob = $request->dob;
-
+       $Students->dob = $request->dob;
+//
         $photo = $request->file('photo')->getClientOriginalName();
 
         $filename = time().$photo;
@@ -43,18 +40,18 @@ return view ('Students.create');
             $file = $request->file('photo');
            $file->move('upload', $filename);
 
-    }
-        $Students->photo = $filename;
+   }
+       $Students->photo = $filename;
         $Students->save();
         return redirect()->route('index');
 
     }
-    public function delete($id){
-        $listStudents = Students::find($id);
-        $listStudents->delete();
-        return redirect()->route('index')->with('alert-danger', 'successfully deleted.');
-    }
+    public function delete(Request $request){
 
+        $listStudents = Students::find($request->id);
+        $listStudents->delete();
+        return redirect()->route('index');
+    }
 
     public function edit($id){
         $listStudents = Students::find($id);

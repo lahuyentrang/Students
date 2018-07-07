@@ -1,107 +1,113 @@
-{{--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-     <link rel="stylesheet" href="css/style.css">
-  <title>Qlsv</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-  <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-   <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-   <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
---}}
+
 @extends('Layouts.layouts')
 @section('content')
   <script>
-  $(document).ready(function(){
 
-      $("#div3").click(function(){
-          $("#div1").load("/create");
-        });
-
-  });
-  $(document).ready(function(){
-        $(".div2").click(function(){
-            var id = $(this).data('id');
-            var url = "/edit/" + id;
-            $("#div1").load(url);
-
-        });
-
-
-    });
 
   </script>
+  {{-- <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
 
-{{--</head>
-<body>--}}
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        </script>
+--}}
 
-
- <table class="table table-hover" id="sample-table-1">
-
-           										<div id="div1" ><button id="div3" color="white">Create a new student</button></div>
-
-
-           									<div >
-
-           										<table class="table table-hover" id="sample-table-1">
-           											<thead class ="thead-dark">
-           												<tr>
-           												    <th>STT</th>
-
-           													<th>Mã SV</th>
-           													<th >Tên </th>
-           													<th>Lớp</th>
-           													<th>Ngày Sinh</th>
-           													<th>Ảnh</th>
-
-           													<th></th>
-           													<th></th>
-           													<th></th>
-           												</tr>
-           											</thead>
-           											<tbody>
-           											@foreach( $model as $item)
-           												<tr>
-
-           													<td class="hidden-xs">{{$item ->id}}</td>
-           													<td>{{$item ->masv}}</td>
-           													<td>{{$item ->name}}</td>
-           													<td>
-           													{{$item->class}}s
-           													</td>
-           													<td >{{$item ->dob}}</td>
-                                                             <td><img src="upload/{{$item->photo}}" alt  ="photo" width= 100 height = 100></td>
-           													<td >
-           													{{--<div >--}}
-           													<button data-id="{{$item ->id}}" class="div2"  color="white">Edit</button>
-
-           													{{--</div>--}}
+<div class = "container">
 
 
-                                                            <td>
-           														<a href="{{url('/delete',['id'=>$item->id])}}"><button  color="white">Delete</button></a>
-                                                            </td>
-                                                            <td>
-                                                            <button color = "white" ><a href="{{url('/details',['id'=>$item->id])}}">Details</a></button>
-                                                            </td>
+
+         <div id="div1" ><button  id="div3" type="button" class=" create-modal btn btn-default" data-toggle="modal" data-target="#create">Create a new student</button></div>
+         @include('Students.create')
 
 
-           												</tr>
-                                                    @endforeach
-           											</tbody>
-           										</table>
+          <div >
 
-           								<!-- end: BASIC TABLE PANEL -->
-           						</div>
+    <br>
+    <div >
+    <table class="table table-bordered" id="sample-table-1">
+           <thead>
+           		<tr>
+           				<th>STT</th>
+
+           				<th>Mã SV</th>
+           				<th >Tên </th>
+           				<th>Lớp</th>
+           				<th>Ngày Sinh</th>
+           				<th>Ảnh</th>
+
+           				<th></th>
+           				<th></th>
+           				<th></th>
+           		</tr>
+           </thead>
+           <tbody>
+           		@foreach( $model as $item)
+           		<tr>
+
+           				<td class="hidden-xs">{{$item ->id}}</td>
+           				<td>{{$item ->masv}}</td>
+           				<td>{{$item ->name}}</td>
+           				<td>{{$item->class}}</td>
+           				<td >{{$item ->dob}}</td>
+                        <td><img src="upload/{{$item->photo}}" alt  ="photo" class="img-thumbnail" width="304" height="236"></td>
+           				<td >
+
+           				<button  type="button" class="edit-modal  btn btn-infor btn-sm"  data-id="{{$item ->id}}"  data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+           				@include('Students.edit')
+           				</td>
+
+                         <td>
+
+           				<button   class ="delete-modal btn btn-danger btn-sm" data-id ="{{$item->id}}" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
+
+           														<!-- Modal delete -->
+
+                        </td>
+                        <td>
+                        <button type="button" class="show-modal  btn btn-info btn-sm"><a href="{{url('/details',['id'=>$item->id])}}" class="details"><span class="glyphicon glyphicon-eye-open"></span></a></button>
+                        </td>
+                </tr>
+                @endforeach
+           </tbody>
+    </table>
+    <!-- end: BASIC TABLE PANEL -->
+    </div>
+    </div>
+   <div class="modal fade" id="delete" role="dialog">
+           <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <form action="/delete" method="get">
+                           <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title" >Delete confirmation</h4>
+                           </div>
+                           <div class="modal-body">
+                                 <p class="text-center">Are you sure to delete this??</p>
+
+                                    <input type="text" name="id" id="deleteId" >
+
+                           </div>
+                           <div class="modal-footer">
+                                <button type="submit" class="btn btn-warning" >Delete</button>
+                                <button class="btn btn-default" data-dismiss="modal">No, cancel!!</button>
+                           </div>
+                    </form>
+                  </div>
+
+           </div>
+    </div>
 
 
-</table>
+</div>
+
 
 @endsection
 

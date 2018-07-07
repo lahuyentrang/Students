@@ -22,8 +22,11 @@ class CreateStudentsTable extends Migration
             $table->date('dob');
             $table->string('photo');
 
+
            // $table->timestamps();
         });
+
+
     }
 
     /**

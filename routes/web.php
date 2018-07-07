@@ -13,7 +13,8 @@
 Route::get('/','StudentsController@index')->name('index');
 Route::get('/create','StudentsController@create');
 Route::post('/store','StudentsController@store');
-Route::get('/delete/{id}','StudentsController@delete')->name('delete');
+Route::get('/delete','StudentsController@delete')->name('delete');
+//Route::post('/destroy','StudentsController@destroy')->name('destroy');
 Route::get('/edit/{id}', 'StudentsController@edit');
 Route::post('/update','StudentsController@update');
 Route::get('/details/{id}', 'StudentsController@details');

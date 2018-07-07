@@ -1,49 +1,52 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-   <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Add</button>
 
-    <div id="id01" class="modal">
+   {{-- <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Add</button>--}}
+    <div id="create" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+         <form class="animate" action="/store" id ="createForm" method = "post" enctype="multipart/form-data">
+                     {{ csrf_field() }}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-tittle">CREATE A NEW STUDENT</h4>
+            </div>
+            <div class="modal-body">
 
-      <form class="modal-content animate" action="/store" id ="searchForm" method = "post" enctype="multipart/form-data">
-      {{ csrf_field() }}
-        <div class="imgcontainer">
-          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <label for="masv"><b>Mã SV</b></label>
+                    <input type="text" placeholder="Nhập mã sv" name="masv" required>
 
+                       {{--teen --}}
+                <label for="name"><b>Tên </b></label>
+                    <input type="text" placeholder="Nhập tên" name="name" required>
+
+                <label for="class"><b>Lớp</b></label>
+                    <input type ="text" placeholder="Nhập tên lớp" name="class" required>
+
+                       {{--  dob--}}
+                <label for="dob"><b>Ngày sinh</b></label>
+                    <input type="date" placeholder="Nhập ngày sinh" name="dob" required>
+
+
+                        {{--   image--}}
+
+                <label for="photo"><b>Ảnh </b></label>
+                    <input type="file"  name="photo" required>
+
+            </div>
+            <div class="modal-footer">
+                 <button type="submit">Add new</button>
+                 <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span>Close
+                 </button>
+            </div>
+         </form>
         </div>
-
-        <div class="container">
-          <label for="masv"><b>Mã SV</b></label>
-          <input type="text" placeholder="Nhập mã sv" name="masv" required>
-
-          <label for="name"><b>Tên </b></label>
-          <input type="text" placeholder="Nhập tên" name="name" required>
-
-          <label for="class"><b>Lớp</b></label>
-          <input type ="text" placeholder="Nhập tên lớp" name="class" required>
-
-           <label for="dob"><b>Ngày sinh</b></label>
-            <input type="date" placeholder="Nhập ngày sinh" name="dob" required>
-
-            <label for="photo"><b>Ảnh </b></label>
-            <input type="file"  name="photo" required>
-
-
-
-          <button type="submit">Add new</button>
-
-        </div>
-
-      </form>
+    </div>
     </div>
 
  <script>
       // Get the modal
-      var modal = document.getElementById('id01');
+      var modal = document.getElementById('create');
 
       // When the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {
@@ -53,33 +56,5 @@
       }
       </script>
 
-</body>
-</html>
-
-
-{{--<form action="/store" id ="searchForm" method = "post" enctype="multipart/form-data">
-{{ csrf_field() }}
-        <dl>
-
-           <dt>Ma SV :</dt>
-               <dd> <input type="text" name ="masv" placeholder="masv"></dd>
-
-           <dt>Name:</dt>
-                <dd><input type="text" name ="name" placeholder="name"></dd>
-
-           <dt>Class:</dt>
-                <dd><input type="text" name ="class" placeholder="class"></dd>
-
-           <dt>Date of birth:</dt>
-                <dd><input type="date" name="dob" placeholder="Date of birth"></dd>
-
-           <dt>Photo</dt>
-                <dd><input type ="file" name ="photo" ></dd>
-
-
-            <dt><input type="submit" name="submit" id="clickme"  value="Add"/></dt>
-        </dl>
-
-</form>--}}
 
 
